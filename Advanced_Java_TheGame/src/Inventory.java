@@ -26,17 +26,6 @@ public class Inventory {
         return Arrays.toString(this.inventoryList);
     }
 
-    public void addObject(GameObject go) {
-        //inventoryList[0]=go;  //Lägger objektet på första plats i arraylistan
-        int index = getFirstEmptyIndex();
-        if (index ==-1){
-            System.out.println("Inventory is full");
-            return;
-            //Om det är fullt i inventory, skicka detta felmeddelande
-        }
-        this.inventoryList[index] = go; //Om det finns plats, lägg till objektet
-    }
-
     private int getFirstEmptyIndex(){  //SKA HANTERAS MED STREAMS;REGEX
         for (int i = 0; i < this.inventoryList.length; i++){
             if (this.inventoryList[i] == (null)){
@@ -48,9 +37,23 @@ public class Inventory {
 
     }
 
+    public void addObject(GameObject go) {
+        //inventoryList[0]=go;  //Lägger objektet på första plats i arraylistan
+        int index = getFirstEmptyIndex();
+        if (index ==-1){
+            System.out.println("Inventory is full");
+            return;
+            //Om det är fullt i inventory, skicka detta felmeddelande
+        }
+        this.inventoryList[index] = go; //Om det finns plats, lägg till objektet
+    }
+
     public void moveObject(Inventory i2, GameObject go){
-        // RÄKNA IGENOM INVENTORY LISTA
-         // if (!isObjectHere(go)) { return Felmeddelande } Om det ej finns, returnera felmedelande
+        // RÄKNA IGENOM INVENTORY LISTA, Kör metoden för att kolla ledighet i inventory
+        int index = getFirstEmptyIndex();
+
+         // if (!isObjectHere(go)) {
+        // return Felmeddelande } Om det ej finns, returnera felmedelande
         i2.addObject(go);
         //this.removeObject(go) TA BORT OBJEKTET I LISTAN
     }

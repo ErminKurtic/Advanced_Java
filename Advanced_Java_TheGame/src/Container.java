@@ -19,7 +19,6 @@ public class Container extends GameObject{  //Får alla egenskaper från GameObj
     }
 
     public boolean isLocked(){
-
         return this.locked;
     }
 

@@ -5,30 +5,55 @@
 
 public class Game {
     private Gui gui;
-    private Room room1, room2;
+    private Room room1, room2, room3, room4, room5;
     private Room[] map;
+    boolean gameOn = true;
 
     public Game(){
+
         //Skapa rum-variable först med konstruktor parametrarna NAMN + BESKRIVNING!
         room1 = new Room("[1]. Vardagsrum", "Stor och fult med en soffa");
         room2 = new Room("[2]. Hall", "liten trång med ful tapet");
-        //Skapar en array av Room-klassen, som man sedan gör om till 2 olika rum
-        map = new Room[2]; // <- - - - -
+        room3 = new Room("[3]. Rum 3", "description3");
+        room4 = new Room("[4]. Rum 4", "description4");
+        room5 = new Room("[5] . EXIT", "THE END");
+
+        //Skapar en array av Room-klassen, som man sedan gör om till 4 olika rum
+        map = new Room[5]; // <- - - - -
         map[0] = room1;
         map[1] = room2;
+        map[2] = room3;
+        map[3] = room4;
+        map[4] = room5;
 
-        //GameObjects
+
+        //- - - GameObjects - - -
         GameObject lampa = new GameObject("Taklampa", false); //Namn +  ska inte gå att flytta
+        GameObject key = new GameObject("Key", true);
         GameObject kanin = new GameObject("Liten vit kanin", true); //Namn + ska kunna flyttas
         Container box = new Container("En blå låda", false, true); //Namn + ska inte kunna gå att flytta + upplåst
+
         room1.addObject(kanin); //I rum ett, läg till objektet kanin
         room1.addObject(box);
         room2.addObject(lampa);
         room2.addObject(box);
-        Person otto = new Person("Otto", 0);
-        room1.addNpc(otto);
-        otto.getInventory().addObject(lampa);
-        System.out.println(otto);
+
+        // - - - NPC's - - -
+        Person Otto = new Person("Otto", 0);
+        room1.addNpc(Otto);
+        Otto.getInventory().addObject(lampa);
+
+        Person Kevin = new Person("Kevin", 1);
+        room2.addNpc(Kevin);
+        Kevin.getInventory().addObject(key);
+
+        Person Lars = new Person("Lars", 2);
+        room3.addNpc(Lars);
+        Lars.getInventory().addObject(lampa);
+
+        Person Erik = new Person("Erik", 3);
+        room3.addNpc(Erik);
+        Erik.getInventory().addObject(lampa);
 
         /*
         System.out.println(lampa);
@@ -37,16 +62,14 @@ public class Game {
         System.out.println(kanin.isMovable()); //Visar true, från metoden i klassen
          */
 
-        //Inventory
-        Inventory inventory = new Inventory(5);
-        System.out.println(inventory); //Printar inventory, som då är tom
-        inventory.addObject(kanin); //Lägger till kanin i inventory arrayen /listan
-        inventory.addObject(kanin);
-        inventory.addObject(kanin);
-        inventory.addObject(kanin);
-        System.out.println(inventory); //Printar ut listan igen, med kanin i första plats
+        //- - - Inventory - - -
+        Inventory playerInventory = new Inventory(5);
+        System.out.println(playerInventory); //Printar inventory, som då är tom
+        playerInventory.addObject(kanin); //Lägger till kanin i inventory arrayen /listan
+        playerInventory.addObject(key);
+        System.out.println(playerInventory); //Printar ut listan igen, med kanin i första plats
 
-        //Starta GUI:t
+        //- - - Starta GUI:t - - -
         this.gui = new Gui();
         //System.out.println(map[1]); //room1
         //gui.setShowRoom(map[1].toString()); // Shows a room in GUI with setShowRoom-method from GUI
@@ -57,7 +80,7 @@ public class Game {
 
         //[r1, r2, r3] Man ska ej kunna gå från rum3 -> rum1
 
-        while (true){
+        while (gameOn){
             String command = gui.getCommand();
             if (!command.equals("-1")) { //Om fältet -1 eller null, kör då nedanstående
 
@@ -68,9 +91,20 @@ public class Game {
                 if (command.equals("2")) {
                     position = 1;
                 }
+                if (command.equals("3")) {
+                    position = 2;
+                }
+                if (command.equals("4")) {
+                    position = 3;
+                }
+                /*if (command.equals("4")) {
+                    if (playerInventory.containsobjectKey) {
+                        position = 4;
+                    }
+                }*/
             }
             gui.setShowRoom(map[position].toString());
-            gui.setShowInventory(inventory);
+            gui.setShowInventory(playerInventory);
 
             if (map[position].getPersons() != null) { //Om map-positionen inte är null
             gui.setPerson(map[position].getPersons()); //Finns personen i rummet, printa den då på GUI

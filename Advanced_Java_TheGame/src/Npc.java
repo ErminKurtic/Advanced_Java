@@ -15,12 +15,10 @@ public abstract class Npc {  //Kan inte skapas som objekt, men kan ärvas av Per
     }
 
     public Inventory getInventory(){
-
         return this.inventory;
     }
 
     public String toString(){
-
         return this.name + " is carrying " +this.inventory;
     }
 }

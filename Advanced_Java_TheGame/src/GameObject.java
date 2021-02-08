@@ -17,7 +17,7 @@ public class GameObject {
     }
 
     public String toString(){
-        return this.name; // <- - - this.name returnerar private String name variablen i klassen
+        return this.name; // <- - - this.name returnerar "private String name" variablen i klassen
     }
 
     public boolean isMovable(){
