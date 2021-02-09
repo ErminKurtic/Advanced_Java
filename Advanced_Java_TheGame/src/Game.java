@@ -33,6 +33,8 @@ public class Game {
         GameObject kanin = new GameObject("Liten vit kanin", true); //Namn + ska kunna flyttas
         Container box = new Container("En blå låda", false, true); //Namn + ska inte kunna gå att flytta + upplåst
 
+        GameObject bajs = new GameObject("En bajskorv", true);
+
         room1.addObject(kanin); //I rum ett, läg till objektet kanin
         room1.addObject(box);
         room2.addObject(lampa);
@@ -52,8 +54,8 @@ public class Game {
         Lars.getInventory().addObject(lampa);
 
         Person Erik = new Person("Erik", 3);
-        room3.addNpc(Erik);
-        Erik.getInventory().addObject(lampa);
+        room4.addNpc(Erik);
+        Erik.getInventory();
 
         /*
         System.out.println(lampa);
@@ -67,7 +69,12 @@ public class Game {
         System.out.println(playerInventory); //Printar inventory, som då är tom
         playerInventory.addObject(kanin); //Lägger till kanin i inventory arrayen /listan
         playerInventory.addObject(key);
+        System.out.println(playerInventory);
+        playerInventory.addObject(bajs);
         System.out.println(playerInventory); //Printar ut listan igen, med kanin i första plats
+
+        playerInventory.moveObject(Erik.inventory, bajs);
+        System.out.println(playerInventory);
 
         //- - - Starta GUI:t - - -
         this.gui = new Gui();
@@ -79,6 +86,9 @@ public class Game {
         gui.setShowRoom(map[position].toString()); //Visa position i rumarrayen
 
         //[r1, r2, r3] Man ska ej kunna gå från rum3 -> rum1
+
+        playerInventory.removeElement("Liten vit kanin");
+        System.out.println(playerInventory);
 
         while (gameOn){
             String command = gui.getCommand();

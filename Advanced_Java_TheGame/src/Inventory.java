@@ -48,14 +48,30 @@ public class Inventory {
         this.inventoryList[index] = go; //Om det finns plats, lägg till objektet
     }
 
-    public void moveObject(Inventory i2, GameObject go){
+    public void moveObject(Inventory inventory2, GameObject go){
         // RÄKNA IGENOM INVENTORY LISTA, Kör metoden för att kolla ledighet i inventory
         int index = getFirstEmptyIndex();
-
+        if (index ==-1){
+            System.out.println("Inventory is full");
+            return;
+        }
          // if (!isObjectHere(go)) {
         // return Felmeddelande } Om det ej finns, returnera felmedelande
-        i2.addObject(go);
+        inventory2.addObject(go);
         //this.removeObject(go) TA BORT OBJEKTET I LISTAN
+    }
+
+    public void removeElement(String matchString){
+        for (int i = 0; i < this.inventoryList.length; i++){
+            if(matchString.equals(this.inventoryList[i].returnNameOfObject())){
+                System.out.println("FOUND THE ITEM");
+                break;
+            }
+            else {
+                System.out.println("DID NOT FIND THE ITEM");
+                break;
+            }
+        }
     }
 
 }

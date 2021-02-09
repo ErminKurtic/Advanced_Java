@@ -14,7 +14,7 @@ public class Room {
         this.person = new Person[5]; //Upp till fem personer i ett rum
         this.name = roomName;
         this.description = roomDescription;
-        this.inventory = new Inventory(10);
+        this.inventory = new Inventory(5);
         // Variabel som skickas in här får rumnamn, beskrivning och storlek på 10 platser i inventory
     }
 

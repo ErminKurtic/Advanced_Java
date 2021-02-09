@@ -27,4 +27,8 @@ public class GameObject {
     public String getName(){
         return this.name;
     }
+
+    public String returnNameOfObject(){
+        return this.name;
+    }
 }
