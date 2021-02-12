@@ -34,5 +34,7 @@ public class Room {
         return this.person[0];   //Skickar tillbaka första positionen
     }
 
-
+    public Inventory getInventory(){
+        return this.inventory;
+    }
 }

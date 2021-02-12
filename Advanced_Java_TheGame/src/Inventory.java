@@ -11,15 +11,21 @@
 
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.IntStream;
 
 public class Inventory {
 
     private GameObject[] inventoryList; //Lista av gameobjects
     private int size; //Listans storlek
+    private int numberOfItems = 0;
 
     public Inventory(int size){
         this.size = size;
         inventoryList = new GameObject[size];
+    }
+    public void countUp(){
+        numberOfItems++;
     }
 
     public String toString(){
@@ -27,6 +33,11 @@ public class Inventory {
     }
 
     private int getFirstEmptyIndex(){  //SKA HANTERAS MED STREAMS;REGEX
+
+       /* GameObject[] gameobject = Arrays.stream(inventoryList)
+                .filter(Object::nonNull)
+                .findFirst();*/
+
         for (int i = 0; i < this.inventoryList.length; i++){
             if (this.inventoryList[i] == (null)){
                 return i;  //Return avbryter loopen och skickar tillbaka värdet
@@ -46,9 +57,10 @@ public class Inventory {
             //Om det är fullt i inventory, skicka detta felmeddelande
         }
         this.inventoryList[index] = go; //Om det finns plats, lägg till objektet
+        numberOfItems++;
     }
 
-    public void moveObject(Inventory inventory2, GameObject go){
+   /* public void moveObject(Inventory inventory2, GameObject go){
         // RÄKNA IGENOM INVENTORY LISTA, Kör metoden för att kolla ledighet i inventory
         int index = getFirstEmptyIndex();
         if (index ==-1){
@@ -59,19 +71,56 @@ public class Inventory {
         // return Felmeddelande } Om det ej finns, returnera felmedelande
         inventory2.addObject(go);
         //this.removeObject(go) TA BORT OBJEKTET I LISTAN
-    }
+    }*/
 
-    public void removeElement(String matchString){
-        for (int i = 0; i < this.inventoryList.length; i++){
+    public boolean findAndRemoveItem(String matchString){
+        int index = -1;
+        boolean done = false;
+
+        for(int i = 0; i < this.inventoryList.length && !done; i++){
             if(matchString.equals(this.inventoryList[i].returnNameOfObject())){
-                System.out.println("FOUND THE ITEM");
-                break;
-            }
-            else {
-                System.out.println("DID NOT FIND THE ITEM");
-                break;
+                index = i;
+                System.out.println("FOUND ITEM");
+                done = true;
+
+                removeElement(this.inventoryList[i], i);
             }
         }
+        return done;
+    }
+
+   public void removeElement(GameObject go, int index){
+        if (go == null){
+            System.out.println("Inventory is empty, nothing to remove");
+        }
+      /* int index = IntStream.range(0, numberOfItems)
+               .filter(i -> go.equals(inventoryList[i]))
+               .findFirst()
+               .orElse(-1);*/
+
+       GameObject[] value = IntStream.range(0, inventoryList.length)
+               .filter(i -> i !=index)
+               .mapToObj(i -> inventoryList[i])
+               .toArray(GameObject[]::new);
+
+        inventoryList = Arrays.copyOf(value, size);
+    }
+
+    public GameObject getGameObject(String matchString){
+
+        GameObject temp = null;
+        boolean done = false;
+        String name = "";
+
+        for(int i = 0; i < numberOfItems && !done; i++){
+            name = this.inventoryList[i].returnNameOfObject();
+
+            if(matchString.equals(name)){
+                temp = inventoryList[i];
+                done = true;
+            }
+        }
+        return temp;
     }
 
 }

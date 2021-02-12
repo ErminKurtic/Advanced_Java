@@ -58,7 +58,7 @@ public class Gui extends JFrame {
 //Nedantåenda spaghetti är inte vacker...
 
 
-    public void gotCommand(){
+    public void gotCommand(){  // Har hämtat kommandot, stoppa loop
         this.gotCommand = false;
     }
 
@@ -83,7 +83,8 @@ public class Gui extends JFrame {
         ActionListener inputListener = e -> {
             this.command = input.getText();
             this.gotCommand = true;
-            System.out.println(this.command);};
+            //System.out.println(this.command);
+        };
 
         input.addActionListener(inputListener);
 
