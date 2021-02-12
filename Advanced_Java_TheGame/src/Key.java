@@ -14,11 +14,11 @@ public class Key extends GameObject {
     }
 
     public boolean doesItFit(Container c){
-        if (this.container.getName().equals(c.getName())){  //Om container(nyckeln) man skickar in heter samma som container
-            return true; //Då passar den
+        if (this.container.getName().equals(c.getName())){
+            return true;
         }
         else {
-            return false; //Annars ej
+            return false;
         }
     }
 }

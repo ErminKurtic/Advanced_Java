@@ -3,7 +3,7 @@
 - Kan vara låst eller öppet
  */
 
-public class Container extends GameObject{  //Får alla egenskaper från GameObject
+public class Container extends GameObject{
 
     private Inventory inventory;
     private boolean locked;
@@ -22,7 +22,4 @@ public class Container extends GameObject{  //Får alla egenskaper från GameObj
         return this.locked;
     }
 
-
-    // METODER -> RITA INTE UT CONTAINER OM DEN ÄR LÅST
-    // ÄR DEN ÖPPEN SÅ SKRIV UT DEN ETC
 }

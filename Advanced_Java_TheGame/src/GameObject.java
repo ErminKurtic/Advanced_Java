@@ -6,10 +6,10 @@
 
 public class GameObject {
 
-    //Instans-variabler är variabler som är bundna till objekt
+
 
     private String name;
-    boolean movable;  // Går det att flytta/plocka upp objekt, därav BOOLEAN för att kolla true/false
+    boolean movable;
 
     public  GameObject(String name, boolean moveable){
         this.name = name;
@@ -17,11 +17,7 @@ public class GameObject {
     }
 
     public String toString(){
-        return this.name; // <- - - this.name returnerar "private String name" variablen i klassen
-    }
-
-    public boolean isMovable(){
-        return this.movable;
+        return this.name;
     }
 
     public String getName(){

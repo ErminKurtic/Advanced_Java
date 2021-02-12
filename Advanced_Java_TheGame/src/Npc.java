@@ -5,7 +5,7 @@
 - Ska finnas en "showPerson" -> visar personens namn och vad de bär på
  */
 
-public abstract class Npc {  //Kan inte skapas som objekt, men kan ärvas av Person-klassen
+public abstract class Npc {
     String name;
     Inventory inventory;
 

@@ -40,38 +40,24 @@ public class Inventory {
 
         for (int i = 0; i < this.inventoryList.length; i++){
             if (this.inventoryList[i] == (null)){
-                return i;  //Return avbryter loopen och skickar tillbaka värdet
-                //Om platsen i arrayen är null, returnera indexen som itemet är på
+                return i;
+
             }
         }
-        return -1; //Returnerar minus ett ifall listan är full, dvs full med items, ingen tom plats ledig
+        return -1;
 
     }
 
     public void addObject(GameObject go) {
-        //inventoryList[0]=go;  //Lägger objektet på första plats i arraylistan
+
         int index = getFirstEmptyIndex();
         if (index ==-1){
             System.out.println("Inventory is full");
             return;
-            //Om det är fullt i inventory, skicka detta felmeddelande
         }
-        this.inventoryList[index] = go; //Om det finns plats, lägg till objektet
+        this.inventoryList[index] = go;
         numberOfItems++;
     }
-
-   /* public void moveObject(Inventory inventory2, GameObject go){
-        // RÄKNA IGENOM INVENTORY LISTA, Kör metoden för att kolla ledighet i inventory
-        int index = getFirstEmptyIndex();
-        if (index ==-1){
-            System.out.println("Inventory is full");
-            return;
-        }
-         // if (!isObjectHere(go)) {
-        // return Felmeddelande } Om det ej finns, returnera felmedelande
-        inventory2.addObject(go);
-        //this.removeObject(go) TA BORT OBJEKTET I LISTAN
-    }*/
 
     public boolean findAndRemoveItem(String matchString){
         int index = -1;
@@ -93,10 +79,6 @@ public class Inventory {
         if (go == null){
             System.out.println("Inventory is empty, nothing to remove");
         }
-      /* int index = IntStream.range(0, numberOfItems)
-               .filter(i -> go.equals(inventoryList[i]))
-               .findFirst()
-               .orElse(-1);*/
 
        GameObject[] value = IntStream.range(0, inventoryList.length)
                .filter(i -> i !=index)

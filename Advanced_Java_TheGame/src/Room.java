@@ -10,12 +10,11 @@ public class Room {
     private Inventory inventory;
     private Person[] person;
 
-    public Room(String roomName, String roomDescription) {   // <- - Konstruktor
-        this.person = new Person[5]; //Upp till fem personer i ett rum
+    public Room(String roomName, String roomDescription) {
+        this.person = new Person[5];
         this.name = roomName;
         this.description = roomDescription;
         this.inventory = new Inventory(5);
-        // Variabel som skickas in här får rumnamn, beskrivning och storlek på 10 platser i inventory
     }
 
     public String toString(){
@@ -30,8 +29,11 @@ public class Room {
         this.person[0] = person; //TODO Fixa fler personer, som i inventory listan, kolla lediga platser och lägg till ifall null
     }
 
-    public Person getPersons(){
-        return this.person[0];   //Skickar tillbaka första positionen
+    public Person getPersons(int i){
+        if (this.person[0] == null){
+            this.person[0] = new Person("Ghost", i);
+        }
+        return this.person[0];
     }
 
     public Inventory getInventory(){
